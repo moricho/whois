@@ -1,0 +1,7 @@
+github.com/famasoon/gowhois v0.0.0-20190729145715-e75e6c2b002c h1:Pg6itDeQ5ePLBVVH6CaLs2JzzYgAlg0I5qVVNSeMMW0=
+github.com/famasoon/gowhois v0.0.0-20190729145715-e75e6c2b002c/go.mod h1:aYH5cEEUzwI/UY+TLBml0K+26U0ZrmXJC7QYy6ROmkc=
+golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
+golang.org/x/net v0.0.0-20191002035440-2ec189313ef0 h1:2mqDk8w/o6UmeUCu5Qiq2y7iMf6anbx+YA8d1JFoFrs=
+golang.org/x/net v0.0.0-20191002035440-2ec189313ef0/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
+golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
+golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
