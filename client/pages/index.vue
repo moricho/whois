@@ -1,53 +1,40 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile">
-      <card
-        title="Free"
-        icon="github-circle"
-      >
-        Open source on <a href="https://github.com/buefy/buefy">
-          GitHub
+    <div class="columns is-mobile" />
+    <hero />
+    <div id="inputfield">
+      <b-field position="is-centered">
+        <b-input v-model="domain" placeholder="Input Domain or IP address..." type="search" icon="magnify" />
+        <a :href="'/whois/' + domain">
+          <p class="control">
+            <button class="button is-info">
+              Lookup
+            </button>
+          </p>
         </a>
-      </card>
-
-      <card
-        title="Responsive"
-        icon="cellphone-link"
-      >
-        <b class="has-text-grey">
-          Every
-        </b> component is responsive
-      </card>
-
-      <card
-        title="Modern"
-        icon="alert-decagram"
-      >
-        Built with <a href="https://vuejs.org/">
-          Vue.js
-        </a> and <a href="http://bulma.io/">
-          Bulma
-        </a>
-      </card>
-
-      <card
-        title="Lightweight"
-        icon="arrange-bring-to-front"
-      >
-        No other internal dependency
-      </card>
+      </b-field>
     </div>
+    <description />
   </section>
 </template>
 
 <script>
-import Card from '~/components/Card'
+import Hero from '~/components/Hero.vue'
 
 export default {
-  name: 'HomePage',
-
   components: {
-    Card
+    Hero
+  },
+  data () {
+    return {
+      domain: ''
+    }
   }
 }
 </script>
+
+<style>
+#inputfield {
+  margin: 40px;
+}
+</style>
