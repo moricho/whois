@@ -7,6 +7,7 @@ import (
 
 	"github.com/famasoon/gowhois/whois"
 	"github.com/gorilla/mux"
+	"https://github.com/uber-go/zap"
 )
 
 type WhoisResponse struct {
@@ -42,6 +43,22 @@ func respondJSON(w http.ResponseWriter, body interface{}, status int) {
 	w.WriteHeader(status)
 	if err := json.NewEncoder(w).Encode(body); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
+
+func logging(logger *zap.logger) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResoponseWriter, r *http.Request)) {
+			requestID := r.Header.Get("X-Request-Id")
+			if requestID == "" {
+				requestID = newRequestID()
+			}
+
+			ctx := context.WithValue(r.Context(), requestIDKey, requestID)
+			w.Header().Set("X-Request-Id", requestID)
+			logger.Info("", zap.String("requestID", requestID), zap.String("METHOD", r.Method), zap.String("Address", r.RemoteAddr), zap.String("UserAgent", r.UserAgent()))
+			next.ServeHTTP(w, r.WithContext(ctx))
+		}
 	}
 }
 
