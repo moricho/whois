@@ -8,3 +8,7 @@ services:
       - ./go:/api
     ports:
       - "80:80"
+  fluentd:
+    build:
+      context: ./fluentd
+      dockerfile: Dockerfile
