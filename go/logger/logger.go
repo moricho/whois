@@ -3,7 +3,7 @@ package logger
 import (
 	"time"
 
-	"github.com/moricho/whois/config"
+	"github.com/moricho/whois/go/config"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
