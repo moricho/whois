@@ -1,0 +1,64 @@
+version: 2.1
+orbs:
+  gke: circleci/gcp-gke@0.2.0
+  gcr: circleci/gcp-gcr@0.6.1
+jobs:
+  build-push-go:
+    description: Build and push Go API image to Google Container Registry
+    machine: true
+    steps:
+      - checkout
+      - gcr/gcr-auth
+      - gcr/build-image:
+          image: api
+          path: ./go
+          tag: $CIRCLE_SHA1
+      - gcr/push-image:
+          image: api
+          tag: $CIRCLE_SHA1
+  build-push-fluentd:
+    description: Build and push Fluentd image to Google Container Registry
+    machine: true
+    steps:
+      - checkout
+      - gcr/gcr-auth
+      - gcr/build-image:
+          image: fluentd
+          path: ./fluentd
+          tag: $CIRCLE_SHA1
+      - gcr/push-image:
+          image: fluentd
+          tag: $CIRCLE_SHA1
+
+  # deploy:
+  #   description: Deploy application to Google Kubernetes Engine
+  #   machine: true
+  #   environment:
+  #       CLUSTER_NAME: circle-ci-cluster
+  #   steps:
+  #     - gke/install
+  #     - gke/init
+  #     - gke/rollout-image:
+  #         cluster: $CLUSTER_NAME
+  #         deployment: web-deployment
+  #         container: web
+  #         image: gcr.io/$GOOGLE_PROJECT_ID/app:$CIRCLE_SHA1
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-push-go:
+          filters:
+             branches:
+               only: master
+      - build-push-fluentd:
+          filters:
+             branches:
+               only: master
+      # - deploy:
+      #     requires:
+      #       - build-push-image
+      #     filters:
+      #         branches:
+      #             only: master
