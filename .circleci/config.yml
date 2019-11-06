@@ -11,6 +11,7 @@ jobs:
       - gcr/gcr-auth
       - gcr/build-image:
           image: api
+          dockerfile: ./go/Dockerfile
           path: ./go
           tag: $CIRCLE_SHA1
       - gcr/push-image:
@@ -24,6 +25,7 @@ jobs:
       - gcr/gcr-auth
       - gcr/build-image:
           image: fluentd
+          dockerfile: ./fluentd/Dockerfile
           path: ./fluentd
           tag: $CIRCLE_SHA1
       - gcr/push-image:
