@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: something-collector
+spec:
+  containers:
+  - name: collector
+    image: gcr.io/<project_id>/go-logging-sample:v1
+    env:
+    - name: SAMPLE_LOG_PATH
+      value: /var/log/app.log
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  - name: fluentd
+    image: gcr.io/<project_id>/fluentd-bigquery:v1
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+    - name: config-volume
+      mountPath: /fluentd/etc
+  volumes:
+  - name: varlog
+    emptyDir: {}
+  - name: config-volume
+    configMap:
+      name: fluentd-config
