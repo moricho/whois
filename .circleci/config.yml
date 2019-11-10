@@ -17,20 +17,20 @@ jobs:
       - gcr/push-image:
           image: api
           tag: $CIRCLE_SHA1
-  build-push-fluentd:
-    description: Build and push Fluentd image to Google Container Registry
-    machine: true
-    steps:
-      - checkout
-      - gcr/gcr-auth
-      - gcr/build-image:
-          image: fluentd
-          dockerfile: ./fluentd/Dockerfile
-          path: ./fluentd
-          tag: $CIRCLE_SHA1
-      - gcr/push-image:
-          image: fluentd
-          tag: $CIRCLE_SHA1
+  # build-push-fluentd:
+  #   description: Build and push Fluentd image to Google Container Registry
+  #   machine: true
+  #   steps:
+  #     - checkout
+  #     - gcr/gcr-auth
+  #     - gcr/build-image:
+  #         image: fluentd
+  #         dockerfile: ./fluentd/Dockerfile
+  #         path: ./fluentd
+  #         tag: $CIRCLE_SHA1
+  #     - gcr/push-image:
+  #         image: fluentd
+  #         tag: $CIRCLE_SHA1
 
   # deploy:
   #   description: Deploy application to Google Kubernetes Engine
@@ -54,10 +54,10 @@ workflows:
           filters:
              branches:
                only: master
-      - build-push-fluentd:
-          filters:
-             branches:
-               only: master
+      # - build-push-fluentd:
+      #     filters:
+      #        branches:
+      #          only: master
       # - deploy:
       #     requires:
       #       - build-push-image
