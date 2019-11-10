@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/moricho/whois/service/hello/proto"
+	pb "github.com/moricho/whois/service/greeter/proto"
 	"google.golang.org/grpc"
 )
 
