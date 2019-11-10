@@ -8,9 +8,9 @@ import (
 	pb "github.com/moricho/whois/service/hello/proto"
 )
 
-type HelloController struct{}
+type GreeterService struct{}
 
-func (hc *HelloController) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
+func (gs *GreeterService) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
 	if req.Name == "" {
 		return nil, errors.New("error: empty input.")
 	}
