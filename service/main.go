@@ -4,12 +4,13 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/moricho/whois/service/greeter/proto"
+	"github.com/moricho/whois/service/greeter"
+	pb "github.com/moricho/whois/service/proto"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	listenPort, err := net.Listen("tcp", ":19003")
+	listenPort, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -17,6 +18,6 @@ func main() {
 	server := grpc.NewServer()
 	greeterService := &greeter.GreeterService{}
 
-	pb.RegisterGreeterService(server, greeterService)
+	pb.RegisterGreeterServer(server, greeterService)
 	server.Serve(listenPort)
 }

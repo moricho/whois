@@ -1,11 +1,11 @@
-package hello
+package greeter
 
 import (
 	"context"
 	"errors"
 	"fmt"
 
-	pb "github.com/moricho/whois/service/greeter/proto"
+	pb "github.com/moricho/whois/service/proto"
 )
 
 type GreeterService struct{}
