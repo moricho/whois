@@ -12,3 +12,21 @@ services:
     build:
       context: ./fluentd
       dockerfile: Dockerfile
+  envoy:
+    build:
+      context: ./envoy
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+  greeter:
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    ports:
+      - 50051:50051
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
